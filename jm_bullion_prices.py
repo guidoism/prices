@@ -51,6 +51,7 @@ for _, _, name in URLS:
         for i in range(c):
             line.append("%s (%i)" % (name, i))
 print '\t'.join(line)
+csv = '\t'.join(line) + '\n'
 
 for date, items in prices:
     line = [date]
@@ -62,6 +63,7 @@ for date, items in prices:
             except:
                 line.append('')
     print '\t'.join(line)
+    csv += '\t'.join(line) + '\n'
        
-
+open('jm_bullion.csv', 'w').write(csv)
 
