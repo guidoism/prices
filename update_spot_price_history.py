@@ -5,12 +5,24 @@
 import re
 import json
 import requests
+import itertools
 
 def sort_date(k):
     k = k[0].split('-')
     return (k[2], k[0], k[1])
     
 def update_gold():
+    prices = dict(json.load(open('gold.json')))
+    #months = sorted((itertools.groupby(sorted(prices.items())[:100],
+    #                                   lambda e: e[0].split('-')[:2])), reverse=True)
+    #for _, month in months:
+    #    print _
+    #    print len(list(month))
+    #    #for day in month:
+    #    #    print day,
+    #    #print
+    #quit()
+
     r = requests.get('http://onlygold.com/Info/Search-Gold-Prices.asp')
 
     MONTHS = {
@@ -28,7 +40,6 @@ def update_gold():
         'Dec': '12',
     }
 
-    prices = dict(json.load(open('gold.json')))
     date = None
     price = None
     for s in r.text.split('\n'):
@@ -64,4 +75,4 @@ def update_silver():
     open('silver.csv', 'w').write('\n'.join((','.join(line) for line in out)))
     
 update_gold()
-update_silver()
+#update_silver()
