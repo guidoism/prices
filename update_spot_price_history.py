@@ -75,4 +75,4 @@ def update_silver():
     open('silver.csv', 'w').write('\n'.join((','.join(line) for line in out)))
     
 update_gold()
-#update_silver()
+update_silver()
